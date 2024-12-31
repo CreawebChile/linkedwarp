@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enlaces</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: #2c3e50;
+        }
+
+        .profile {
+            text-align: center;
+            margin: 40px 0;
+            animation: fadeIn 1s ease;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .links-container {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .link-button {
+            background: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: slideIn 0.5s ease forwards;
+            opacity: 0;
+            margin: 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .link-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .link-button i {
+            font-size: 1.5rem;
+        }
+
+        .fa-whatsapp { color: #25D366; }
+        .fa-instagram { color: #E4405F; }
+        .fa-facebook { color: #1877F2; }
+        .fa-x-twitter { color: #000000; }
+        .fa-youtube { color: #FF0000; }
+        .fa-linkedin { color: #0A66C2; }
+        .fa-github { color: #333333; }
+        .fa-globe { color: #4a90e2; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .links-container {
+                padding: 10px;
+            }
+            
+            .link-button {
+                padding: 12px 16px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile">
+        <img id="userLogo" class="logo" src="default-avatar.png">
+        <h1 id="userName"></h1>
+    </div>
+    <div id="linksContainer" class="links-container"></div>
+    <script type="module" src="./view.js"></script>
+</body>
+</html>

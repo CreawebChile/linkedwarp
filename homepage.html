@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administra tus Enlaces</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --danger-color: #e74c3c;
+            --success-color: #2ecc71;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 95%;
+        }
+
+        .profile-section, .links-section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: transform 0.2s;
+        }
+
+        .logo-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .upload-container {
+            margin: 15px 0;
+        }
+
+        #logoUpload {
+            display: none;
+        }
+
+        .upload-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+
+        .link-item {
+            background: var(--secondary-color);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.2s;
+        }
+
+        .link-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .link-form {
+            display: grid;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .link-form {
+                grid-template-columns: 1fr 1fr 2fr auto;
+            }
+        }
+
+        .form-input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-delete {
+            background: var(--danger-color);
+            color: white;
+            padding: 6px 12px;
+            font-size: 0.9rem;
+        }
+
+        .share-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #shareUrl {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .link-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+
+        .link-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .link-item i {
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .link-item .fa-whatsapp { color: #25D366; }
+        .link-item .fa-instagram { color: #E4405F; }
+        .link-item .fa-facebook { color: #1877F2; }
+        .link-item .fa-x-twitter { color: #000000; }
+        .link-item .fa-youtube { color: #FF0000; }
+        .link-item .fa-linkedin { color: #0A66C2; }
+        .link-item .fa-github { color: #333333; }
+        .link-item .fa-globe { color: #4a90e2; }
+
+        .link-url {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .link-url {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-section">
+            <h2>Tu Perfil</h2>
+            <img id="logoPreview" class="logo-preview" src="default-avatar.png" alt="Logo">
+            <div class="upload-container">
+                <label for="logoUpload" class="upload-btn">
+                    <i class="fas fa-camera"></i> Cambiar Imagen
+                </label>
+                <input type="file" id="logoUpload" accept="image/*">
+            </div>
+            <div class="profile-info">
+                <p>Nombre: <span id="loggedUserFName"></span></p>
+                <p>Correo: <span id="loggedUserEmail"></span></p>
+            </div>
+        </div>
+
+        <div class="links-section">
+            <h2>Tus Enlaces</h2>
+            <div id="linksList"></div>
+            
+            <div class="link-form">
+                <select id="platformSelect" class="form-input">
+                    <option value="whatsapp">WhatsApp</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="twitter">Twitter/X</option>
+                    <option value="youtube">YouTube</option>
+                    <option value="linkedin">LinkedIn</option>
+                    <option value="github">GitHub</option>
+                    <option value="custom">Web Personalizada</option>
+                </select>
+                <input type="text" id="linkTitle" class="form-input" placeholder="Título">
+                <input type="text" id="linkUrl" class="form-input" placeholder="URL">
+                <button class="btn btn-primary" id="addLinkBtn">
+                    <i class="fas fa-plus"></i> Añadir
+                </button>
+            </div>
+        </div>
+
+        <div class="share-section">
+            <h3>Comparte tu página</h3>
+            <input type="text" id="shareUrl" readonly>
+            <button class="btn btn-primary" id="copyLinkBtn">
+                <i class="fas fa-copy"></i> Copiar Enlace
+            </button>
+        </div>
+
+        <button id="logout" class="btn btn-primary" style="margin-top: 20px;">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+        </button>
+    </div>
+    <script type="module" src="./homepage.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro e Inicio de Sesión</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="firebaseauth.js"></script>
+</head>
+<body>
+    <div class="container" id="signup" style="display:none;">
+      <h1 class="form-title">Registro</h1>
+      <form method="post" action="">
+        <div id="signUpMessage" class="messageDiv" style="display:none;"></div>
+        <div class="input-group">
+           <i class="fas fa-user"></i>
+           <input type="text"  id="fName" placeholder="Nombre" required>
+           <label for="fname">Nombre</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text"  id="lName" placeholder="Apellido" required>
+            <label for="lName">Apellido</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email"  id="rEmail" placeholder="Correo" required>
+            <label for="rEmail">Correo</label>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="rPassword"  placeholder="Contraseña" required>
+            <label for="rPassword">Contraseña</label>
+        </div>
+       <button class="btn" id="submitSignUp">Registrarse</button>
+      </form>
+      <!-- Eliminamos la sección de "or" y los íconos -->
+      <div class="links">
+        <p>¿Ya tienes una cuenta?</p>
+        <button id="signInButton">Iniciar Sesión</button>
+      </div>
+    </div>
+
+  <div class="container" id="signIn">
+        <h1 class="form-title">Iniciar Sesión</h1>
+        <form method="post" action="">
+          <div id="signInMessage" class="messageDiv" style="display:none;"></div>
+
+          <div class="input-group">
+              <i class="fas fa-envelope"></i>
+              <input type="email"  id="email" placeholder="Correo" required>
+              <label for="email">Correo</label>
+          </div>
+          <div class="input-group">
+              <i class="fas fa-lock"></i>
+            <input type="password" id="password"  placeholder="Contraseña" required>
+              <label for="password">Contraseña</label>
+          </div>
+          <p class="recover">
+            <a href="#">Recuperar Contraseña</a>
+          </p>
+         <button  class="btn"  id="submitSignIn">Iniciar Sesión</button>
+        </form>
+        <!-- Eliminamos la sección de "or" y los íconos -->
+        <div class="links">
+          <p>¿No tienes una cuenta?</p>
+          <button id="signUpButton">Registrarse</button>
+        </div>
+      </div>
+      <script src="script.js"></script>
+</body>
+</html>
